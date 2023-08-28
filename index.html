@@ -163,7 +163,14 @@
                             window.location.replace('index.html')
                         })
                         break;
-                
+                    case 'nologin':
+                    Toast.fire({
+                            icon: 'warning',
+                            title: 'Chưa đăng nhập'
+                        }).then(()=>{
+                            window.location.replace('index.html')
+                        })
+                        break;
                     default:
                         break;
                 }

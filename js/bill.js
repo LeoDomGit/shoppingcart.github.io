@@ -78,7 +78,7 @@ function loadData(){
             }
         });
     }else{
-        window.location.replace('index.html');
+        window.location.replace('index.html?err=nologin');
     }
 }
 function billdetail(){
