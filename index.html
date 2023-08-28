@@ -347,7 +347,8 @@
             }
         }
         function showMore() {
-            $.ajax({
+            if(localStorage.getItem('token') &&localStorage.getItem('token')!=null){
+                $.ajax({
                 type: "GET",
                 url: link,
                 data: {
@@ -411,7 +412,9 @@
                 }
             });
 
-        }
+       
+            }
+           }
         function addToCart() {
             if (!localStorage.getItem("cart") || localStorage.getItem('cart') == null) {
                 var arr = [];
