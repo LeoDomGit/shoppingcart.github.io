@@ -77,6 +77,8 @@ function loadData(){
                 }
             }
         });
+    }else{
+        window.location.replace('index.html');
     }
 }
 function billdetail(){
