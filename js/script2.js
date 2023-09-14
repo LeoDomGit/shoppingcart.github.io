@@ -177,8 +177,6 @@ function Owl(){
             1200:{
                 items:4
             },
-
-
         }
         
     })
