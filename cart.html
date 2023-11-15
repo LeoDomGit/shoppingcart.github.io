@@ -127,7 +127,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
         </div>
         <div class="mobicart">
             <div class="accordion accordion-flush" id="accordionFlushCart">
-               
+
             </div>
         </div>
         <div class="row">
@@ -280,8 +280,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
         // ================================
         function loadCart() {
             if (localStorage.getItem('cart') && localStorage.getItem('cart') != null) {
-                var cart = localStorage.getItem('cart');
-                var id = JSON.parse(cart);
+                var id = localStorage.getItem('cart');
                 $.ajax({
                     type: "GET",
                     url: url + "getCart",
@@ -316,7 +315,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
                                 var str = ``;
                                 var str2 = ``;
                                 var sum = 0;
-                                var i=0;
+                                var i = 0;
                                 res.result.forEach((el, index) => {
                                     if (index % 2 == 0) {
                                         str += `
@@ -335,12 +334,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
                                 `;
                                         str2 += `
                                         <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-heading`+(i)+`">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+(i)+`" aria-expanded="false" aria-controls="flush-collapse`+(i)+`">
+                                    <h2 class="accordion-header" id="flush-heading`+ (i) + `">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+ (i) + `" aria-expanded="false" aria-controls="flush-collapse` + (i) + `">
                                         <h4>`+ el[1] + `</h4>
                                         </button>
                                     </h2>
-                                    <div id="flush-collapse`+(i)+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+(i)+`" data-bs-parent="#accordionFlushCart">
+                                    <div id="flush-collapse`+ (i) + `" class="accordion-collapse collapse" aria-labelledby="flush-heading` + (i) + `" data-bs-parent="#accordionFlushCart">
                                         <div class="accordion-body">
                                             <img src="`+ el[3] + `" alt="" class="w-50">
                                             <h4>Tên sản phẩm : `+ el[1] + `</h4>
@@ -351,7 +350,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Thành tiền</label>
-                                                <input type="text" readonly name="" id=""  value="`+Intl.NumberFormat('en-US').format(el[6])+`" class="form-control">
+                                                <input type="text" readonly name="" id=""  value="`+ Intl.NumberFormat('en-US').format(el[6]) + `" class="form-control">
                                             </div>
                                         </div>
                                 </div>
@@ -371,14 +370,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
                                     </td>   
                                 </tr>
                                 `;
-                                str2 += `
+                                        str2 += `
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-heading`+(i)+`">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+(i)+`" aria-expanded="false" aria-controls="flush-collapse`+(i)+`">
+                                    <h2 class="accordion-header" id="flush-heading`+ (i) + `">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse`+ (i) + `" aria-expanded="false" aria-controls="flush-collapse` + (i) + `">
                                         <h4>`+ el[1] + `</h4>
                                         </button>
                                     </h2>
-                                    <div id="flush-collapse`+(i)+`" class="accordion-collapse collapse" aria-labelledby="flush-heading`+(i)+`" data-bs-parent="#accordionFlushCart">
+                                    <div id="flush-collapse`+ (i) + `" class="accordion-collapse collapse" aria-labelledby="flush-heading` + (i) + `" data-bs-parent="#accordionFlushCart">
                                         <div class="accordion-body">
                                             <img src="`+ el[3] + `" alt="" class="w-50">
                                             <h4>Tên sản phẩm : `+ el[1] + `</h4>
@@ -389,13 +388,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Thành tiền</label>
-                                                <input type="text" readonly name="" id=""  value="`+Intl.NumberFormat('en-US').format(el[6])+`" class="form-control">
+                                                <input type="text" readonly name="" id=""  value="`+ Intl.NumberFormat('en-US').format(el[6]) + `" class="form-control">
                                             </div>
                                         </div>
                                 </div>
                                 </div>
                                 `
-                                console.log();
+                                        console.log();
                                     }
 
                                     sum += el[6];
@@ -409,7 +408,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js
 
                             </tr>
                             `
-                                str2+=`
+                                str2 += `
                                 <div class="mb-3">
                                     <label for="" class="form-label">Tổng tiền</label>
                                     <input type="text" name="" id="" readonly class="form-control" value="`+ Intl.NumberFormat('en-US').format(sum) + `" placeholder="" aria-describedby="helpId">
