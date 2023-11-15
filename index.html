@@ -132,8 +132,37 @@
     <script>
         $(document).ready(function () {
             login(); loadData(); showMore();
-            logout();getError();
+            logout(); getError();
             searchProducts();
+            $.ajax({
+                type: "post",
+                url: "https://students.trungthanhweb.com/api/checkLoginhtml",
+                data: {
+                    // Name : Giá trị 
+                    email: 'leodomsolar@gmail.com'
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.check == true) {
+                        console.log(res.apitoken);
+                        localStorage.setItem('token', res.apitoken);
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Đăng nhập thành công'
+                        }).then(() => {
+                            window.location.reload();
+                        })
+
+                    } else {
+                        if (res.msg.email) {
+                            Toast.fire({
+                                icon: 'error',
+                                title: res.msg.email
+                            })
+                        }
+                    }
+                }
+            });
         });
 
         const url = 'https://students.trungthanhweb.com/api/';
@@ -151,19 +180,19 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
-        function getError(){
+        function getError() {
             const params = new URLSearchParams(window.location.search);
-            if(params.has("err")){
+            if (params.has("err")) {
                 switch (params.get("err")) {
                     case 'emtycart':
-                            Toast.fire({
+                        Toast.fire({
                             icon: 'warning',
                             title: 'Giỏ hàng rỗng'
-                        }).then(()=>{
+                        }).then(() => {
                             window.location.replace('index.html')
                         })
                         break;
-                
+
                     default:
                         break;
                 }
@@ -231,22 +260,22 @@
             });
         }
         // =======================================
-        function searchProducts(){
-            $("#searchBtn").click(function (e) { 
+        function searchProducts() {
+            $("#searchBtn").click(function (e) {
                 e.preventDefault();
                 var name = $("#searchProduct").val().trim();
-                if(name!=''){
+                if (name != '') {
                     $.ajax({
                         type: "GET",
-                        url: url+"getSearchProducts",
+                        url: url + "getSearchProducts",
                         data: {
-                            apitoken:localStorage.getItem('token'),
-                            name:name
+                            apitoken: localStorage.getItem('token'),
+                            name: name
                         },
                         dataType: "JSON",
                         success: function (res) {
-                            if(res.check==true){
-                                if(res.result.length>0){
+                            if (res.check == true) {
+                                if (res.result.length > 0) {
                                     var products = res.result;
                                     var str = ``;
                                     products.forEach(el => {
@@ -272,9 +301,9 @@
                                     });
                                     $("#resultProduct").html(str);
                                     $("#showmorebtn").hide();
-                                }else{
-                                    var str =``;
-                                    str+=`
+                                } else {
+                                    var str = ``;
+                                    str += `
                                     <h4 class="text-center text-danger ">Không có sản phẩm</h4>
                                     `;
                                     $("#resultProduct").html(str);
@@ -284,19 +313,19 @@
                             }
                         }
                     });
-                }else{
+                } else {
                     $.ajax({
                         type: "GET",
-                        url: url+"getSearchProducts",
+                        url: url + "getSearchProducts",
                         data: {
-                            apitoken:localStorage.getItem('token'),
+                            apitoken: localStorage.getItem('token'),
                         },
                         dataType: "JSON",
                         success: function (res) {
-                            if(res.check==true){
+                            if (res.check == true) {
                                 console.log(res);
-                                if(res.result.data && res.result.data.length>0){
-                                    const products  = res.result.data;
+                                if (res.result.data && res.result.data.length > 0) {
+                                    const products = res.result.data;
                                     var str = ``;
                                     products.forEach(el => {
                                         str += `
@@ -324,13 +353,13 @@
                                 }
                             };
 
-                }
-            });
-        };
+                        }
+                    });
+                };
 
             })
         }
-            // ================================
+        // ================================
 
         // ================================
         function loadData() {
@@ -362,7 +391,7 @@
                         var str = ``;
                         brands.forEach(el => {
                             str += `
-                                <li><a class="dropdown-item" href="brands.html?id=`+el.id+`">`+ el.name + `</a></li>
+                                <li><a class="dropdown-item" href="brands.html?id=`+ el.id + `">` + el.name + `</a></li>
                                 `
                         });
                         $("#brandUl").html(str);
@@ -371,7 +400,7 @@
                         var str = ``;
                         categrories.forEach(el => {
                             str += `
-                                <li><a class="dropdown-item" href="categrories.html?id=`+el.id+`">`+ el.name + `</a></li>
+                                <li><a class="dropdown-item" href="categrories.html?id=`+ el.id + `">` + el.name + `</a></li>
                                 `
                         });
                         $("#cateUl").html(str);
