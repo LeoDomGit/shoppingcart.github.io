@@ -134,35 +134,32 @@
             login(); loadData(); showMore();
             logout(); getError();
             searchProducts();
-            $.ajax({
-                type: "post",
-                url: "https://students.trungthanhweb.com/api/checkLoginhtml",
-                data: {
-                    // Name : Giá trị 
-                    email: 'leodomsolar@gmail.com'
-                },
-                dataType: "JSON",
-                success: function (res) {
-                    if (res.check == true) {
-                        console.log(res.apitoken);
-                        localStorage.setItem('token', res.apitoken);
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Đăng nhập thành công'
-                        }).then(() => {
+            if (!localStorage.getItem('token')) {
+                $.ajax({
+                    type: "post",
+                    url: "https://students.trungthanhweb.com/api/checkLoginhtml",
+                    data: {
+                        // Name : Giá trị 
+                        email: 'leodomsolar@gmail.com'
+                    },
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.check == true) {
+                            console.log(res.apitoken);
+                            localStorage.setItem('token', res.apitoken);
                             window.location.reload();
-                        })
-
-                    } else {
-                        if (res.msg.email) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: res.msg.email
-                            })
+                        } else {
+                            if (res.msg.email) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: res.msg.email
+                                })
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
+
         });
 
         const url = 'https://students.trungthanhweb.com/api/';
